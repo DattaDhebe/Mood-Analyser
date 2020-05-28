@@ -19,11 +19,22 @@ namespace Mood_Analyser_Test
         }
 
         [Test]
-        public void GivenWrongMessage_ShouldReturnSAD()
+        public void GivenSadMoodMessage_ShouldReturnSAD()
         {
             MoodAnalyser moodAnalyser = new MoodAnalyser();
-            string mood = moodAnalyser.Mood("sad");
+            string mood = moodAnalyser.Mood("I am in Sad Mood");
             Assert.AreEqual("SAD", mood);
         }
+
+        [Test]
+        public void GivenAnyMooodMessage_ShouldReturnHAPPY()
+        {
+            MoodAnalyser moodAnalyser = new MoodAnalyser();
+            string mood = moodAnalyser.Mood("I am in Any Mood");
+            Assert.AreEqual("HAPPY", mood);
+        }
+
+
+
     }
 }
