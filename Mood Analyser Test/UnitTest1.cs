@@ -53,16 +53,9 @@ namespace Mood_Analyser_Test
         [Test]
         public void GivenNullMessage_ShouldReturnHAPPY()
         {
-            try
-            {
-                MoodAnalyser moodAnalyser = new MoodAnalyser();
-                string mood = moodAnalyser.Mood(null);
-            }
-            catch (MoodAnalyserException)
-            {
-                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.ENTERED_NULL, "Enter Proper String");
-            }
-            
+            MoodAnalyser moodAnalyser = new MoodAnalyser();
+            string mood = moodAnalyser.Mood(null);
+            Assert.AreEqual("HAPPY", mood);
         }
 
         [Test]
