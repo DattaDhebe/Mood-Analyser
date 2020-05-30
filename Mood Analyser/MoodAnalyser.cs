@@ -21,18 +21,17 @@ namespace Mood_Analyser
             //hadle null exception
             try
             {
+                if (message.Length == 0)
+                    throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.EMPTY_STRING, "Enter Proper String");
                 if (message.Contains("Sad"))
                     return "SAD";
                 return "HAPPY";
             }
             catch (NullReferenceException)
             {
-                return "HAPPY";
+                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.ENTERED_NULL, "Enter Proper String");
             }
-            catch (MoodAnalyserException)
-            {
-                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.EMPTY_STRING, "Enter Proper String");
-            } 
+
         }
     }
 }

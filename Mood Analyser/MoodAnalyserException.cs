@@ -17,7 +17,7 @@ namespace Mood_Analyser
         {
             EMPTY_STRING, ENTERED_NULL
         }
-        public ExceptionType eType;
+        public ExceptionType eType { get; set; }
 
         public MoodAnalyserException(ExceptionType eType, string message) : base(message)
         {
@@ -26,15 +26,6 @@ namespace Mood_Analyser
 
         public MoodAnalyserException(string message, Exception innerException) : base(message, innerException)
         {
-        }
-
-        protected MoodAnalyserException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
-
-        public MoodAnalyserException(ExceptionType eType)
-        {
-            this.eType = eType;
         }
     }
 }
