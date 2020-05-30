@@ -16,7 +16,6 @@ namespace Mood_Analyser
             this.message = message;
         }
 
-<<<<<<< HEAD
         public string Mood(string message) 
         {
             //hadle null exception
@@ -33,20 +32,6 @@ namespace Mood_Analyser
             catch (MoodAnalyserException)
             {
                 throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.EMPTY_STRING, "Enter Proper String");
-=======
-        public string Mood(string message)
-        {
-            try
-            {
-                if (message.Contains("Sad Mood"))
-                {
-                    return "SAD";
-                }
-                return "HAPPY";
-            } catch (NullReferenceException)
-            {
-                return "HAPPY";
->>>>>>> UC2_AddCustomExceptionHandling
             } 
         }
     }
