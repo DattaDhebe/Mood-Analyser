@@ -16,22 +16,23 @@ namespace Mood_Analyser
             this.message = message;
         }
 
-        public string Mood()
+        public string Mood(string message) 
         {
-            if (message.Contains("Sad"))
+            //hadle null exception
+            try
             {
-                return "SAD";
+                if (message.Contains("Sad"))
+                    return "SAD";
+                return "HAPPY";
             }
-            return "HAPPY";
-        }
-
-        public string Mood(string msg)
-        { 
-            if (msg.Contains("Sad Mood"))
+            catch (NullReferenceException)
             {
-                return "SAD";
+                return "HAPPY";
             }
-            return "HAPPY"; 
+            catch (MoodAnalyserException)
+            {
+                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.EMPTY_STRING, "Enter Proper String");
+            } 
         }
     }
 }

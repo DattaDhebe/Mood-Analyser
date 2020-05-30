@@ -37,8 +37,8 @@ namespace Mood_Analyser_Test
         [Test]
         public void GivenMessage_ShouldReturnHAPPY()
         {
-            MoodAnalyser moodAnalyser = new MoodAnalyser("I am in any mood");
-            string mood = moodAnalyser.Mood();
+            MoodAnalyser moodAnalyser = new MoodAnalyser("I am in Any Mood");
+            string mood = moodAnalyser.Mood("I am in Any Mood");
             Assert.AreEqual("HAPPY", mood);
         }
 
@@ -46,8 +46,37 @@ namespace Mood_Analyser_Test
         public void GivenSadMessage_ShouldReturnSAD()
         {
             MoodAnalyser moodAnalyser = new MoodAnalyser("I am in Sad Mood");
-            string mood = moodAnalyser.Mood();
+            string mood = moodAnalyser.Mood("I am in Sad Mood");
             Assert.AreEqual("SAD", mood);
+        }
+
+        [Test]
+        public void GivenNullMessage_ShouldReturnHAPPY()
+        {
+            try
+            {
+                MoodAnalyser moodAnalyser = new MoodAnalyser();
+                string mood = moodAnalyser.Mood(null);
+            }
+            catch (MoodAnalyserException)
+            {
+                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.ENTERED_NULL, "Enter Proper String");
+            }
+            
+        }
+
+        [Test]
+        public void GivenEmptyMessage_ShouldReturnCustomException()
+        {
+            try
+            {
+                MoodAnalyser moodAnalyser = new MoodAnalyser();
+                string mood = moodAnalyser.Mood("");
+            }
+            catch (MoodAnalyserException)
+            {
+                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.EMPTY_STRING);
+            }
         }
     }
 }
