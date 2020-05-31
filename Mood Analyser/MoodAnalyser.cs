@@ -24,7 +24,7 @@ namespace Mood_Analyser
                 /// To Find out wether the String is Emty of Not
                 if (message.Length == 0)
                 {
-                    throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.EMPTY_STRING, "Enter Proper String");
+                    throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.Empty_String, "Enter Proper String");
                 }
     
                 if (message.Contains("Sad"))
@@ -35,7 +35,7 @@ namespace Mood_Analyser
             }
             catch (NullReferenceException)
             {
-                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.ENTERED_NULL, "Enter Proper String");
+                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.Entered_Null, "Enter Proper String");
             }
 
         }

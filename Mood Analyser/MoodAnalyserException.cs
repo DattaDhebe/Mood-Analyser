@@ -15,7 +15,7 @@ namespace Mood_Analyser
 
         public enum ExceptionType
         {
-            EMPTY_STRING, ENTERED_NULL
+            Empty_String, Entered_Null, No_Such_Class_Error
         }
         public ExceptionType eType { get; set; }
 

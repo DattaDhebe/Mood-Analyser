@@ -17,8 +17,19 @@ namespace Mood_Analyser
         public static object CreateObject(string ClassName)
         {
             Type T = Type.GetType(ClassName);
-            var objectInstance = Activator.CreateInstance(T);
-            return objectInstance;
+            try
+            {
+                if(T == null)
+                {
+                    throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.No_Such_Class_Error, "Enter Proper Class Name");
+                }
+                var objectInstance = Activator.CreateInstance(T);
+                return objectInstance;
+            }
+            catch (MoodAnalyserException)
+            {
+                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.No_Such_Class_Error, "Enter Proper Class Name");
+            }
         }
 
         public static void Main(string[] args)
