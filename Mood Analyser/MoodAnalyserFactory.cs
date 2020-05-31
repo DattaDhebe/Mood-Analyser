@@ -13,17 +13,26 @@ namespace Mood_Analyser
         /// Create Intance of Object to use in reflection
         /// </summary>
         /// <param name="ClassName"></param>
+        /// <param name="constructor"></param>
         /// <returns></returns>
-        public static object CreateObject(string ClassName)
-        {
-            Type T = Type.GetType(ClassName);
+        public static object CreateObject(string ClassName, params object[] constructor)
+        {    
             try
             {
-                if(T == null)
+                Type T = Type.GetType(ClassName);
+                
+                // To find if ClassName is Right or Not if Wrong throw Exception
+                if (T == null)
                 {
                     throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.No_Such_Class_Error, "Enter Proper Class Name");
                 }
-                var objectInstance = Activator.CreateInstance(T);
+                var objectInstance = Activator.CreateInstance(T, constructor);
+                
+                // To find construct parameter is right or wrong if Wrong throw Missing Method Exception
+                if (objectInstance == null)
+                {
+                    throw new MissingMethodException(MoodAnalyserException.ExceptionType.No_Such_Method_Error+ "Enter Right Method");
+                }
                 return objectInstance;
             }
             catch (MoodAnalyserException)
@@ -33,8 +42,7 @@ namespace Mood_Analyser
         }
 
         public static void Main(string[] args)
-        {
-           
+        {  
         }
     }
 }
