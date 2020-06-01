@@ -98,7 +98,7 @@ namespace Mood_Analyser_Test
         [Test]
         public void GivenMoodAnalyserFactory_ShouldReturnMoodAnalyserObject()
         {
-            Object moodAnalyserFactory = MoodAnalyserFactory.CreateObject("Mood_Analyser.MoodAnalyser");
+            Object moodAnalyserFactory = MoodAnalyserFactory.CreateObject("Mood_Analyser.MoodAnalyser", "Happy Mood");
             MoodAnalyser moodAnalyser = new MoodAnalyser();
             bool actual = moodAnalyser.Equals(moodAnalyserFactory);
             bool expected = true;
@@ -112,7 +112,7 @@ namespace Mood_Analyser_Test
         {
             try
             {
-                Object moodAnalyserFactory = MoodAnalyserFactory.CreateObject("Mood_Analyser.Mood");
+                Object moodAnalyserFactory = MoodAnalyserFactory.CreateObject("Mood_Analyser.Mood", "Happy Mood");
                 MoodAnalyser moodAnalyser = new MoodAnalyser();
             }
             catch (MoodAnalyserException e)
@@ -128,7 +128,51 @@ namespace Mood_Analyser_Test
         {
             try
             {
-                Object moodAnalyserFactory = MoodAnalyserFactory.CreateObject("Mood_Analyser.MoodAnalyser");
+                object moodAnalyserFactory = MoodAnalyserFactory.CreateObject("Mood_Analyser.MoodAnalyser", null);
+                MoodAnalyser moodAnalyser = new MoodAnalyser();
+            }
+            catch (MoodAnalyserException e)
+            {
+                Assert.AreEqual(MoodAnalyserException.ExceptionType.No_Such_Method_Error, e.eType);
+            }
+        }
+        /// <summary>
+        /// UseCase5.1 : Given Mood Analyser Factory with Parameter Return Mood Analyser Object
+        /// </summary>
+        [Test]
+        public void GivenMoodAnalyserFactoryWithParameterConstructor_ShouldReturnMoodAnalyserObject()
+        {
+            Object moodAnalyserFactory = MoodAnalyserFactory.CreateObject("Mood_Analyser.MoodAnalyser", "Happy Mood");
+            MoodAnalyser moodAnalyser = new MoodAnalyser();
+            bool actual = moodAnalyser.Equals(moodAnalyserFactory);
+            bool expected = true;
+            Assert.AreEqual(expected, actual);
+        }
+        /// <summary>
+        /// UserCase5.2 : Given Class Name When Not Proper should Throw MoodAnalyserException
+        /// </summary>
+        [Test]
+        public void GivenClassNameWithParameter_WhenNotProper_ShouldThrowCustomException()
+        {
+            try
+            {
+                Object moodAnalyserFactory = MoodAnalyserFactory.CreateObject("Mood_Analyser.Mood", "Happy Mood");
+                MoodAnalyser moodAnalyser = new MoodAnalyser();
+            }
+            catch (MoodAnalyserException e)
+            {
+                Assert.AreEqual(MoodAnalyserException.ExceptionType.No_Such_Class_Error, e.eType);
+            }
+        }
+        /// <summary>
+        /// UserCase5.3 : Given Class Name When Constuctor is Not Proper should Throw MoodAnalyserException
+        /// </summary>
+        [Test]
+        public void GivenClassNameWithParameter_WhenConstructorNotProper_ShouldThrowCustomException()
+        {
+            try
+            {
+                Object moodAnalyserFactory = MoodAnalyserFactory.CreateObject("Mood_Analyser.MoodAnalyser", null);
                 MoodAnalyser moodAnalyser = new MoodAnalyser();
             }
             catch (MoodAnalyserException e)
