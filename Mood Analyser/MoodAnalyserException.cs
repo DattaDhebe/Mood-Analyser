@@ -10,7 +10,6 @@ namespace Mood_Analyser
     {
         public MoodAnalyserException()
         {
-       
         }
 
         public enum ExceptionType

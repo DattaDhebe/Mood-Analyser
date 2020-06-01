@@ -100,7 +100,7 @@ namespace Mood_Analyser_Test
         {
             Object moodAnalyserFactory = MoodAnalyserFactory.CreateObject("Mood_Analyser.MoodAnalyser", "Happy Mood");
             MoodAnalyser moodAnalyser = new MoodAnalyser();
-            bool actual = moodAnalyser.Equals(moodAnalyserFactory);
+            bool actual = moodAnalyser.equals(moodAnalyserFactory);
             bool expected = true;
             Assert.AreEqual(expected, actual);
         }
@@ -144,7 +144,7 @@ namespace Mood_Analyser_Test
         {
             Object moodAnalyserFactory = MoodAnalyserFactory.CreateObject("Mood_Analyser.MoodAnalyser", "Happy Mood");
             MoodAnalyser moodAnalyser = new MoodAnalyser();
-            bool actual = moodAnalyser.Equals(moodAnalyserFactory);
+            bool actual = moodAnalyser.equals(moodAnalyserFactory);
             bool expected = true;
             Assert.AreEqual(expected, actual);
         }
@@ -186,9 +186,25 @@ namespace Mood_Analyser_Test
         [Test]
         public void GivenHappyMessageInMethod_WhenProper_ShouldReturnHAPPY()
         {
-            string moodAnalyserFactory = MoodAnalyserFactory.MethodInvokeUsingReflaction("Happy Mood");
+            string moodAnalyserFactory = MoodAnalyserFactory.MethodInvokeUsingReflaction("Mood", "Happy Mood");
             Assert.AreEqual("HAPPY", moodAnalyserFactory);
         }
+        /// <summary>
+        /// UseCase6.2 : Given Happy Message Should Using Reflection When Method Not Proper Should Return Exception.
+        /// </summary>
+        [Test]
+        public void GivenHappyMessageInMethod_WhenMethodNotProper_ShouldReturnException()
+        {
+            try
+            {
+                string moodAnalyserFactory = MoodAnalyserFactory.MethodInvokeUsingReflaction("Mood123", "Happy Mood");
+            }
+            catch (MoodAnalyserException e)
+            {
+                Assert.AreEqual(MoodAnalyserException.ExceptionType.No_Such_Method_Error, e.eType);
+            }
+        }
+        
 
     }
 }

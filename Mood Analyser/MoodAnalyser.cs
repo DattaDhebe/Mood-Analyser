@@ -17,8 +17,7 @@ namespace Mood_Analyser
         }
         
         public string Mood(string message) 
-        {
-            
+        {           
             try
             {
                 /// To Find out wether the String is Emty of Not
@@ -37,14 +36,13 @@ namespace Mood_Analyser
             {
                 throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.Entered_Null, "Enter Proper String");
             }
-
         }
         /// <summary>
         /// To compare Two Object and if Equals Return True
         /// </summary>
         /// <param name="moodAnalyserFactory"></param>
         /// <returns></returns>
-        public bool Equals(Object moodAnalyserFactory)
+        public bool equals(Object moodAnalyserFactory)
         {
             Object Mood = new MoodAnalyser();
             var moodAnalyser = Mood.GetType();

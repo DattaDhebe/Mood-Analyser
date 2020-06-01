@@ -7,9 +7,7 @@ namespace Mood_Analyser
 {
     public class MoodAnalyserFactory
     {
-        public MoodAnalyserFactory()
-        {
-        }
+        public MoodAnalyserFactory() { }
         /// <summary>
         /// Create Intance of Object to use in reflection
         /// </summary>
@@ -46,17 +44,24 @@ namespace Mood_Analyser
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        public static string MethodInvokeUsingReflaction(string message)
+        public static string MethodInvokeUsingReflaction(string methodName, string message)
         {
-            MethodBase method = typeof(MoodAnalyser).GetMethod("Mood");
-            object objInstance = Activator.CreateInstance(typeof(MoodAnalyser), message);
-            string[] str = { message };
-            string returnMessage = (string)method.Invoke(objInstance, str);
-            return returnMessage;
+            try
+            {
+                MethodBase method = typeof(MoodAnalyser).GetMethod(methodName);
+                object objInstance = Activator.CreateInstance(typeof(MoodAnalyser), message);
+                
+                //passed message to invoke method in Mood Analyser
+                string[] str = { message };               
+                string returnMessage = (string)method.Invoke(objInstance, str);
+                return returnMessage;
+            }
+            catch (NullReferenceException)
+            {
+                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.No_Such_Method_Error, "Enter Proper Method Name");
+            }
         }
 
-        public static void Main(string[] args)
-        {
-        }
+        public static void Main(string[] args) { }
     }
 }
