@@ -164,7 +164,22 @@ namespace Mood_Analyser_Test
                 Assert.AreEqual(MoodAnalyserException.ExceptionType.No_Such_Class_Error, e.eType);
             }
         }
-        
+        /// <summary>
+        /// UserCase5.3 : Given Class Name When Constuctor is Not Proper should Throw MoodAnalyserException
+        /// </summary>
+        [Test]
+        public void GivenClassNameWithParameter_WhenConstructorNotProper_ShouldThrowCustomException()
+        {
+            try
+            {
+                Object moodAnalyserFactory = MoodAnalyserFactory.CreateObject("Mood_Analyser.MoodAnalyser", null);
+                MoodAnalyser moodAnalyser = new MoodAnalyser();
+            }
+            catch (MoodAnalyserException e)
+            {
+                Assert.AreEqual(MoodAnalyserException.ExceptionType.No_Such_Method_Error, e.eType);
+            }
+        }
 
     }
 }
