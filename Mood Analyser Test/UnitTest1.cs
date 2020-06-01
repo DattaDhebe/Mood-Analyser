@@ -1,5 +1,7 @@
 using NUnit.Framework;
 using Mood_Analyser;
+using System.Reflection;
+using System;
 
 namespace Mood_Analyser_Test
 {
@@ -17,7 +19,9 @@ namespace Mood_Analyser_Test
             string mood = moodAnalyser.Mood("Happy");
             Assert.AreEqual("HAPPY", mood);
         }
-
+        /// <summary>
+        /// UseCase1.1 : Given Sad Message Should Return SAD
+        /// </summary>
         [Test]
         public void GivenSadMoodMessage_ShouldReturnSAD()
         {
@@ -25,7 +29,9 @@ namespace Mood_Analyser_Test
             string mood = moodAnalyser.Mood("I am in Sad Mood");
             Assert.AreEqual("SAD", mood);
         }
-
+        /// <summary>
+        /// UseCase1.2 : Given Any Mood Message Should Return HAPPY
+        /// </summary>
         [Test]
         public void GivenAnyMooodMessage_ShouldReturnHAPPY()
         {
@@ -33,15 +39,9 @@ namespace Mood_Analyser_Test
             string mood = moodAnalyser.Mood("I am in Any Mood");
             Assert.AreEqual("HAPPY", mood);
         }
-
-        [Test]
-        public void GivenMessage_ShouldReturnHAPPY()
-        {
-            MoodAnalyser moodAnalyser = new MoodAnalyser("I am in Any Mood");
-            string mood = moodAnalyser.Mood("I am in Any Mood");
-            Assert.AreEqual("HAPPY", mood);
-        }
-
+        /// <summary>
+        /// UseCase1.1 'Refactored' : Given Sad Mood Message in Constructor Should Return SAD
+        /// </summary>
         [Test]
         public void GivenSadMessage_ShouldReturnSAD()
         {
@@ -49,7 +49,19 @@ namespace Mood_Analyser_Test
             string mood = moodAnalyser.Mood("I am in Sad Mood");
             Assert.AreEqual("SAD", mood);
         }
-
+        /// <summary>
+        /// UseCase1.2 'Refactored' : Given Happy Mood Message in Constructor Should Return HAPPY
+        /// </summary>
+        [Test]
+        public void GivenMessage_ShouldReturnHAPPY()
+        {
+            MoodAnalyser moodAnalyser = new MoodAnalyser("I am in Happy Mood");
+            string mood = moodAnalyser.Mood("I am in Happy Mood");
+            Assert.AreEqual("HAPPY", mood);
+        }
+        /// <summary>
+        /// UseCase3 : if wrong info should return custom Exception
+        /// </summary>
         [Test]
         public void GivenNullMessage_ShouldReturnHAPPY()
         {
@@ -61,10 +73,12 @@ namespace Mood_Analyser_Test
             }
             catch (MoodAnalyserException e)
             {
-                Assert.AreEqual(MoodAnalyserException.ExceptionType.ENTERED_NULL, e.eType);
+                Assert.AreEqual(MoodAnalyserException.ExceptionType.Entered_Null, e.eType);
             }
         }
-
+        /// <summary>
+        /// UseCase3.2 : Given Empty Message should throw Custom Exception
+        /// </summary>
         [Test]
         public void GivenEmptyMessage_ShouldReturnCustomException()
         {
@@ -75,8 +89,53 @@ namespace Mood_Analyser_Test
             }
             catch (MoodAnalyserException e)
             {
-                Assert.AreEqual(MoodAnalyserException.ExceptionType.EMPTY_STRING, e.eType);
+                Assert.AreEqual(MoodAnalyserException.ExceptionType.Empty_String, e.eType);
             }
         }
+        /// <summary>
+        /// UseCase4.1 : Given Mood Analyser class Should return Mood Analyser Object
+        /// </summary>
+        [Test]
+        public void GivenMoodAnalyserFactory_ShouldReturnMoodAnalyserObject()
+        {
+            Object moodAnalyserFactory = MoodAnalyserFactory.CreateObject("Mood_Analyser.MoodAnalyser");
+            MoodAnalyser moodAnalyser = new MoodAnalyser();
+            bool actual = moodAnalyser.Equals(moodAnalyserFactory);
+            bool expected = true;
+            Assert.AreEqual(expected, actual);
+        }
+        /// <summary>
+        /// UserCase4.2 : Given Class Name When Not Proper should Thro MoodAnalyserException
+        /// </summary>
+        [Test]
+        public void GivenClassName_WhenNotProper_ShouldThrowCustomException()
+        {
+            try
+            {
+                Object moodAnalyserFactory = MoodAnalyserFactory.CreateObject("Mood_Analyser.Mood");
+                MoodAnalyser moodAnalyser = new MoodAnalyser();
+            }
+            catch (MoodAnalyserException e)
+            {
+                Assert.AreEqual(MoodAnalyserException.ExceptionType.No_Such_Class_Error, e.eType);
+            }
+        }
+        /// <summary>
+        /// UseCase4.3 : Given Class When Constructor Not Proper should Throw MoodAnalyserException
+        /// </summary>
+        [Test]
+        public void GivenClass_WhenConstructorNotProper_ShouldThrowCustomException()
+        {
+            try
+            {
+                Object moodAnalyserFactory = MoodAnalyserFactory.CreateObject("Mood_Analyser.MoodAnalyser");
+                MoodAnalyser moodAnalyser = new MoodAnalyser();
+            }
+            catch (MoodAnalyserException e)
+            {
+                Assert.AreEqual(MoodAnalyserException.ExceptionType.No_Such_Method_Error, e.eType);
+            }
+        }
+
     }
 }
