@@ -180,6 +180,15 @@ namespace Mood_Analyser_Test
                 Assert.AreEqual(MoodAnalyserException.ExceptionType.No_Such_Method_Error, e.eType);
             }
         }
+        /// <summary>
+        /// UseCase6.1 : Given Happy Message Should Using Reflection When Proper Should Return HAPPY Mood.
+        /// </summary>
+        [Test]
+        public void GivenHappyMessageInMethod_WhenProper_ShouldReturnHAPPY()
+        {
+            string moodAnalyserFactory = MoodAnalyserFactory.MethodInvokeUsingReflaction("Happy Mood");
+            Assert.AreEqual("HAPPY", moodAnalyserFactory);
+        }
 
     }
 }

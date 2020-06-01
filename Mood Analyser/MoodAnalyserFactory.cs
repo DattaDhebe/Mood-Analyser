@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Runtime.Serialization;
 
 namespace Mood_Analyser
@@ -39,6 +40,19 @@ namespace Mood_Analyser
             {
                 throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.No_Such_Class_Error, "Enter Proper Class Name");
             }
+        }
+        /// <summary>
+        /// Invoke Method Using Reflection of Mood Analyser 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public static string MethodInvokeUsingReflaction(string message)
+        {
+            MethodBase method = typeof(MoodAnalyser).GetMethod("Mood");
+            object objInstance = Activator.CreateInstance(typeof(MoodAnalyser), message);
+            string[] str = { message };
+            string returnMessage = (string)method.Invoke(objInstance, str);
+            return returnMessage;
         }
 
         public static void Main(string[] args)
