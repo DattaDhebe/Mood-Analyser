@@ -1,15 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 
 namespace Mood_Analyser
 {
     public class MoodAnalyser
     {
-        private string message { get; set; }
+        public string message { get; set; }
+        
+        private string myString;
+        public MoodAnalyser()
+        {
+            myString = "Mood";
+        }
 
-        public MoodAnalyser() { }
+        public string StringProperty
+        {
+            get
+            {
+                return myString;
+            }
+        }
 
         public MoodAnalyser(String message)
         {
@@ -54,6 +67,6 @@ namespace Mood_Analyser
             }
             return false;
         }
-
+        
     }
 }
