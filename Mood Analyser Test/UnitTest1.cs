@@ -228,21 +228,7 @@ namespace Mood_Analyser_Test
                 Assert.AreEqual(MoodAnalyserException.ExceptionType.No_Such_Field_Error, e.eType);
             }
         }
-        /// <summary>
-        /// UseCase 7.3 : given null field should return exception.
-        /// </summary>
-        [Test]
-        public void GivenHappyMessageInMethod_WhenNullField_ShouldReturnException()
-        {
-            try
-            {
-                string moodAnalyserFactory = MoodAnalyserFactory.SetFieldUsingReflection("Mood", null, "Mood");
-            }
-            catch (MoodAnalyserException e)
-            {
-                Assert.AreEqual(MoodAnalyserException.ExceptionType.No_Such_Field_Error, e.eType);
-            }
-        }
+        
 
 
     }
